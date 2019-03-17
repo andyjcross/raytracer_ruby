@@ -7,8 +7,12 @@ class Vector3
     @z = z
   end
 
-  def *(scalar)
-    self.class.new(x * scalar, y * scalar, z * scalar)
+  def *(other)
+    if other.is_a?(Numeric)
+      self.class.new(x * other, y * other, z * other)
+    elsif other.is_a?(self.class)
+      self.class.new(x * other.x, y * other.y, z * other.z)
+    end
   end
 
   def +(other)
