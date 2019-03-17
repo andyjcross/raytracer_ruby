@@ -9,7 +9,11 @@ class Image
   def height; @buffer.height; end
 
   def set_pixel(x, y, color)
-    @buffer[x,y] = ChunkyPNG::Color.rgb(color.r, color.g, color.b)
+    @buffer[x,y] = ChunkyPNG::Color.rgb(
+      (color.r * 255).to_i.clamp(0,255),
+      (color.g * 255).to_i.clamp(0,255),
+      (color.b * 255).to_i.clamp(0,255),
+    )
   end
 
   def save(filename)
