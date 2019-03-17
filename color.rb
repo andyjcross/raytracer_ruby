@@ -1,9 +1,7 @@
-class Color
-  attr_reader :r, :g, :b
+require_relative "vector3"
 
-  def initialize(r, g, b)
-    @r = r
-    @g = g
-    @b = b
-  end
+class Color < Vector3
+  def r; x; end
+  def g; y; end
+  def b; z; end
 end
