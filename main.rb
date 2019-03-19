@@ -6,28 +6,31 @@ require_relative "light"
 require_relative "image"
 
 objects = [
-  Sphere.new(Vector3.new(-3, -1, 3), 4, Color.new(0, 0, 1)), # blue
-  Sphere.new(Vector3.new(3, -2, 0), 1, Color.new(1, 0, 0)), # red
-  Sphere.new(Vector3.new(0, 3, 8), 3, Color.new(0, 1, 0)) # green
+  Sphere.new(Vector3.new(-3, -1, 3), 4, Color.new(0, 0, 1)), # large, blue, bottom left
+  Sphere.new(Vector3.new(3, -2, 0), 1, Color.new(1, 0, 0)), # small, red, bottom right
+  Sphere.new(Vector3.new(0, 3, 8), 3, Color.new(0, 1, 0)) # green, medium, up ahead
 ]
 
 lights = [
   Light.new(Vector3.new(8, -1, 1), 1.0)
 ]
 
-eye_position = Vector3.new(0, 0, -10)
-window_width = 10
-window_height = 10
+
 
 image = Image.new(512, 512)
 
 image.width.times do |x|
   image.height.times do |y|
-    pixel_x = ((x.to_f / image.width) * window_width) - (window_width.to_f / 2)
-    pixel_y = -(((y.to_f / image.height) * window_height) - (window_height.to_f / 2))
+
+    camera_position = Vector3.new(0, 0, -10)
+    window_width = 10.0
+    window_height = 10.0
+
+    pixel_x = ((x.to_f / image.width) * window_width) - (window_width / 2)
+    pixel_y = -(((y.to_f / image.height) * window_height) - (window_height / 2))
     pixel_position = Vector3.new(pixel_x, pixel_y, 0)
 
-    ray = Ray.new(eye_position, pixel_position)
+    ray = Ray.new(camera_position, pixel_position)
 
     color = Color.new(0, 0, 0)
 
